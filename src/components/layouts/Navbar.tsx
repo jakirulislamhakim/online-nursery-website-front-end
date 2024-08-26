@@ -1,4 +1,9 @@
 import { NavLink } from 'react-router-dom';
+import SearchBarIcon from '../icons/SearchBarIcon';
+import ProductFIlterIcon from '../icons/ProductFIlterIcon';
+import LoginIcon from '../icons/LoginIcon';
+import CheckoutIcon from '../icons/CheckoutIcon';
+import DropdownMenu from '../icons/DropdownMenu';
 
 const Navbar = () => {
    const navItems = (
@@ -19,46 +24,43 @@ const Navbar = () => {
    );
 
    return (
-      <div className="max-w-screen-2xl mx-auto p-2">
-         <nav className="navbar bg-base-100">
-            <div className="navbar-start">
-               <div className="dropdown">
-                  <div
-                     tabIndex={0}
-                     role="button"
-                     className="btn btn-ghost lg:hidden"
-                  >
-                     <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
+      <div className="bg-green-200">
+         <div className="max-w-screen-2xl mx-auto ">
+            <nav className="navbar">
+               <div className="navbar-start  p-0  lg:w-1/3">
+                  <div className="dropdown">
+                     <div
+                        tabIndex={0}
+                        role="button"
+                        className="btn btn-ghost lg:hidden"
                      >
-                        <path
-                           strokeLinecap="round"
-                           strokeLinejoin="round"
-                           strokeWidth="2"
-                           d="M4 6h16M4 12h8m-8 6h16"
-                        />
-                     </svg>
+                        <DropdownMenu />
+                     </div>
+                     <ul
+                        tabIndex={0}
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow uppercase"
+                     >
+                        {navItems}
+                     </ul>
                   </div>
-                  <ul
-                     tabIndex={0}
-                     className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-                  >
-                     {navItems}
-                  </ul>
+                  <img
+                     src="https://i.ibb.co/kx8YVrF/Screenshot-80.png"
+                     alt="logo"
+                     className="size-[40px] md:size-[60px] lg:size-[100px] rounded-full"
+                  />
+                  {/* <a className="btn btn-ghost text-xl">Anisha</a> */}
                </div>
-               <a className="btn btn-ghost text-xl">Anisha</a>
-            </div>
-            <div className="navbar-center hidden lg:flex">
-               <ul className="menu menu-horizontal ">{navItems}</ul>
-            </div>
-            <div className="navbar-end">
-               <a className="btn">Button</a>
-            </div>
-         </nav>
+               <div className="navbar-center uppercase hidden lg:flex">
+                  <ul className="menu menu-horizontal ">{navItems}</ul>
+               </div>
+               <div className="navbar-end gap-1 md:gap-4">
+                  <SearchBarIcon />
+                  <ProductFIlterIcon />
+                  <LoginIcon />
+                  <CheckoutIcon />
+               </div>
+            </nav>
+         </div>
       </div>
    );
 };
