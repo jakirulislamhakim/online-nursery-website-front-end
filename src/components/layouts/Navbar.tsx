@@ -24,11 +24,11 @@ const Navbar = () => {
    );
 
    return (
-      <div className="bg-green-200">
+      <div className="bg-green-200 shadow-xl border-b-2 border-base-200 rounded-xl">
          <div className="max-w-screen-2xl mx-auto ">
             <nav className="navbar">
                <div className="navbar-start  p-0  lg:w-1/3">
-                  <div className="dropdown">
+                  <div className="dropdown z-50">
                      <div
                         tabIndex={0}
                         role="button"

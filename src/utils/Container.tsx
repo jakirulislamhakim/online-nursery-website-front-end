@@ -2,12 +2,16 @@ import { ReactNode } from 'react';
 
 type TContainerProps = {
    children: ReactNode;
-   cssClass?: string;
+   className?: string;
 };
 
-const Container = ({ children, cssClass }: TContainerProps) => {
+const Container = ({ children, className }: TContainerProps) => {
    return (
-      <div className={`max-w-screen-2xl mx-auto p-2 border-2 ${cssClass}`}>
+      <div
+         className={`max-w-screen-2xl mx-auto px-1 md:px-2 ${
+            className ? className : ''
+         }`}
+      >
          {children}
       </div>
    );

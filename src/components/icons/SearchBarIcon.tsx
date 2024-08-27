@@ -44,7 +44,7 @@ const SearchBarIcon = () => {
                <label className="input input-bordered flex items-center gap-2 pr-2 max-w-[300px]">
                   <input
                      type="text"
-                     className="grow p-1 font-medium"
+                     className="grow  font-medium "
                      placeholder="Search"
                   />
                   <svg
