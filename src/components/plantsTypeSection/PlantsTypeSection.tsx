@@ -10,7 +10,7 @@ import 'swiper/css/pagination';
 import './style.css';
 
 // import required modules
-import { FreeMode, Pagination } from 'swiper/modules';
+import { FreeMode, Pagination, Autoplay } from 'swiper/modules';
 import { useEffect, useState } from 'react';
 
 type TPlant = {
@@ -38,10 +38,14 @@ const PlantsTypeSection = () => {
             slidesPerView={5}
             spaceBetween={30}
             freeMode={true}
+            autoplay={{
+               delay: 2000,
+               disableOnInteraction: false,
+            }}
             pagination={{
                clickable: true,
             }}
-            modules={[FreeMode, Pagination]}
+            modules={[FreeMode, Pagination, Autoplay]}
             className="mySwiper"
             breakpoints={{
                // when window width is >= 320px

@@ -1,11 +1,12 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import SearchBarIcon from '../icons/SearchBarIcon';
 import ProductFIlterIcon from '../icons/ProductFIlterIcon';
-import LoginIcon from '../icons/LoginIcon';
 import CheckoutIcon from '../icons/CheckoutIcon';
 import DropdownMenu from '../icons/DropdownMenu';
 
 const Navbar = () => {
+   const location = useLocation();
+
    const navItems = (
       <>
          <li>
@@ -24,7 +25,7 @@ const Navbar = () => {
    );
 
    return (
-      <div className="bg-green-200 shadow-xl border-b-2 border-base-200 rounded-xl">
+      <div className="bg-green-200 shadow-xl border-b-2 border-base-200 lg:rounded-xl">
          <div className="max-w-screen-2xl mx-auto ">
             <nav className="navbar">
                <div className="navbar-start  p-0  lg:w-1/3">
@@ -54,9 +55,9 @@ const Navbar = () => {
                   <ul className="menu menu-horizontal ">{navItems}</ul>
                </div>
                <div className="navbar-end gap-1 md:gap-4">
-                  <SearchBarIcon />
-                  <ProductFIlterIcon />
-                  <LoginIcon />
+                  {location.pathname === '/products' && <SearchBarIcon />}
+                  {location.pathname === '/products' && <ProductFIlterIcon />}
+                  {/* <LoginIcon /> */}
                   <CheckoutIcon />
                </div>
             </nav>

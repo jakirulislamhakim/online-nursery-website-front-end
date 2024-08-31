@@ -8,11 +8,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import 'swiper/css/effect-fade'; 
+
 
 import './swiperStyle.css';
 
 // import required modules
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Autoplay, Pagination, Navigation , EffectFade } from 'swiper/modules';
 
 const HeroSection = () => {
    return (
@@ -20,15 +22,16 @@ const HeroSection = () => {
          <Swiper
             spaceBetween={30}
             centeredSlides={true}
+            effect={'fade'}
             autoplay={{
-               delay: 3000,
+               delay: 4000,
                disableOnInteraction: false,
             }}
             pagination={{
                clickable: true,
             }}
             navigation={true}
-            modules={[Autoplay, Pagination, Navigation]}
+            modules={[Autoplay, Pagination, Navigation , EffectFade]}
             className="mySwiper"
          >
             <SwiperSlide>
