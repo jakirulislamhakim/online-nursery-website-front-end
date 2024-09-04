@@ -1,13 +1,44 @@
+import { useState } from 'react';
+import { searchTerm } from '../../redux/features/products/productSlice';
+import { useAppDispatch } from '../../redux/hooks';
+
 const SearchBarIcon = () => {
+   const [searchInputValue, setSearchInputValue] = useState('');
+
+   const dispatch = useAppDispatch();
+
+   const handleSearch = () => {
+      if (!searchInputValue) return;
+      dispatch(searchTerm(searchInputValue));
+      setSearchInputValue('');
+
+      // Close the modal after search
+      const modal = document.getElementById('my_modal_2') as HTMLDialogElement;
+      if (modal) {
+         modal.close();
+      }
+   };
+
+   const openModal = () => {
+      setSearchInputValue(''); // Reset input before opening modal
+      const dialog = document.getElementById('my_modal_2') as HTMLDialogElement;
+      if (dialog) {
+         dialog.showModal();
+      }
+   };
+
    return (
       <>
          <label className="input input-bordered flex items-center gap-2 pr-2 hidden lg:flex">
             <input
+               onChange={e => setSearchInputValue(e.target.value)}
+               value={searchInputValue}
                type="text"
                className="grow p-1 font-medium"
                placeholder="Search"
             />
             <svg
+               onClick={handleSearch}
                xmlns="http://www.w3.org/2000/svg"
                viewBox="0 0 16 16"
                fill="currentColor"
@@ -23,14 +54,14 @@ const SearchBarIcon = () => {
          {/* Open the modal using document.getElementById('ID').showModal() method */}
          <button
             className="btn btn-success btn-outline btn-sm cursor-pointer border rounded-lg lg:hidden"
-            onClick={() => document.getElementById('my_modal_2').showModal()}
+            onClick={openModal}
          >
             {' '}
             <svg
                xmlns="http://www.w3.org/2000/svg"
                viewBox="0 0 16 16"
                fill="currentColor"
-               className="  size-6 opacity-70 w-full "
+               className="  size-6 opacity-70 w-full"
             >
                <path
                   fillRule="evenodd"
@@ -39,15 +70,18 @@ const SearchBarIcon = () => {
                />
             </svg>
          </button>
-         <dialog id="my_modal_2" className="modal  ">
+         <dialog id="my_modal_2" className="modal">
             <div className="modal-box max-w-[350px] p-5 border-2 border-red-400 flex items-center justify-center">
                <label className="input input-bordered flex items-center gap-2 pr-2 max-w-[300px]">
                   <input
+                     onChange={e => setSearchInputValue(e.target.value)}
+                     value={searchInputValue}
                      type="text"
-                     className="grow  font-medium "
+                     className="grow font-medium "
                      placeholder="Search"
                   />
                   <svg
+                     onClick={handleSearch}
                      xmlns="http://www.w3.org/2000/svg"
                      viewBox="0 0 16 16"
                      fill="currentColor"

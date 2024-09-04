@@ -1,6 +1,5 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import SearchBarIcon from '../icons/SearchBarIcon';
-import ProductFIlterIcon from '../icons/ProductFIlterIcon';
 import CheckoutIcon from '../icons/CheckoutIcon';
 import DropdownMenu from '../icons/DropdownMenu';
 
@@ -54,9 +53,9 @@ const Navbar = () => {
                <div className="navbar-center uppercase hidden lg:flex">
                   <ul className="menu menu-horizontal ">{navItems}</ul>
                </div>
-               <div className="navbar-end gap-1 md:gap-4">
+               <div className="navbar-end gap-1 md:gap-8">
                   {location.pathname === '/products' && <SearchBarIcon />}
-                  {location.pathname === '/products' && <ProductFIlterIcon />}
+                  {/* {location.pathname === '/products' && <ProductFIlterIcon />} */}
                   {/* <LoginIcon /> */}
                   <CheckoutIcon />
                </div>
