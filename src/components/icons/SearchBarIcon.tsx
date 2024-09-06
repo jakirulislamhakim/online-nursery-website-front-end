@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { searchTerm } from '../../redux/features/products/productSlice';
+import React, { useState } from 'react';
+import { pages, searchTerm } from '../../redux/features/products/productSlice';
 import { useAppDispatch } from '../../redux/hooks';
 
 const SearchBarIcon = () => {
@@ -10,6 +10,7 @@ const SearchBarIcon = () => {
    const handleSearch = () => {
       if (!searchInputValue) return;
       dispatch(searchTerm(searchInputValue));
+      dispatch(pages(1));
       setSearchInputValue('');
 
       // Close the modal after search
@@ -27,11 +28,18 @@ const SearchBarIcon = () => {
       }
    };
 
+   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Enter') {
+         handleSearch();
+      }
+   };
+
    return (
       <>
          <label className="input input-bordered flex items-center gap-2 pr-2 hidden lg:flex">
             <input
                onChange={e => setSearchInputValue(e.target.value)}
+               onKeyDown={handleKeyDown}
                value={searchInputValue}
                type="text"
                className="grow p-1 font-medium"
@@ -75,6 +83,7 @@ const SearchBarIcon = () => {
                <label className="input input-bordered flex items-center gap-2 pr-2 max-w-[300px]">
                   <input
                      onChange={e => setSearchInputValue(e.target.value)}
+                     onKeyDown={handleKeyDown}
                      value={searchInputValue}
                      type="text"
                      className="grow font-medium "
