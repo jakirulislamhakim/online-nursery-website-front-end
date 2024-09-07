@@ -17,7 +17,7 @@ const SortingDropdown = ({ setSort }: TSortProps) => {
       <select
          value={selectedOption}
          onChange={handleSelectChange}
-         className="select select-bordered w-full max-w-[300px] select-sm"
+         className="select select-bordered w-full max-w-[200px] select-sm"
       >
          <option className="text-[10px] md:text-sm" value="">
             Default Sort

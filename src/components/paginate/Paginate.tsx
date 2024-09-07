@@ -15,13 +15,13 @@ const Paginate = ({ needTotalPage }: TPaginateProps) => {
    const page = useAppSelector((state: RootState) => state.product.pages);
 
    return (
-      <div className="join flex justify-center items-center my-6 ">
+      <div className="join  flex justify-center items-center my-6 ">
          <div className="border-2 border-green-500 mb-4">
             {pageForPagination?.map(item => (
                <button
                   onClick={() => dispatch(pages(item))}
                   key={item}
-                  className={`join-item btn   ${
+                  className={`join-item btn btn-xs md:btn-md  ${
                      page === item ? 'btn-active border-x-green-400' : ''
                   }`}
                >

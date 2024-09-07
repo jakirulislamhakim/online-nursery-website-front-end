@@ -8,12 +8,12 @@ const ProductCard = (product: TProduct) => {
    return (
       <div className="card bg-base-100  mx-auto shadow-xl">
          <figure className="max-h-[200px] md:max-h-[300px] bg-cover">
-            <img className='w-full h-full' src={image} alt={category} />
+            <img className="w-full h-full" src={image} alt={category} />
          </figure>
          <div className="card-body ">
             <h2 className="card-title">{title}</h2>
             <p>{description}</p>
-            <div className="flex mt-2">
+            <div className="flex mt-1 md:mt-2">
                <p className="">
                   Price:
                   <span className="font-semibold ">{price} $</span>
