@@ -20,8 +20,18 @@ const products = baseApi.injectEndpoints({
                params: queryParams,
             };
          },
+         providesTags: ['product'],
+      }),
+      deleteAProduct: builder.mutation({
+         query: (id: string) => {
+            return {
+               url: `/products/${id}`,
+               method: 'DELETE',
+            };
+         },
+         invalidatesTags: ['product'],
       }),
    }),
 });
 
-export const { useGetAllProductsQuery } = products;
+export const { useGetAllProductsQuery, useDeleteAProductMutation } = products;

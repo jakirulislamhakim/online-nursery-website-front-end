@@ -15,7 +15,7 @@ const Navbar = () => {
             <NavLink to={'/products'}>Products</NavLink>
          </li>
          <li>
-            <NavLink to={'/cart'}>Cart</NavLink>
+            <NavLink to={'/dashboard'}>Dashboard</NavLink>
          </li>
          <li>
             <NavLink to={'/checkout'}>Checkout</NavLink>
@@ -51,7 +51,7 @@ const Navbar = () => {
                   {/* <a className="btn btn-ghost text-xl">Anisha</a> */}
                </div>
                <div className="navbar-center uppercase hidden lg:flex">
-                  <ul className="menu menu-horizontal ">{navItems}</ul>
+                  <ul className="menu menu-horizontal space-x-4">{navItems}</ul>
                </div>
                <div className="navbar-end gap-1 md:gap-8">
                   {location.pathname === '/products' && <SearchBarIcon />}

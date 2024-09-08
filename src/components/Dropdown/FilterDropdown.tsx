@@ -15,7 +15,7 @@ const FilterDropdown = ({ setCategory }: TFilterProps) => {
 
    if (isLoading) {
       return (
-         <Container className="mx-0">
+         <Container className="ml-0">
             <div className="skeleton h-5 w-[200px]"></div>
          </Container>
       );
