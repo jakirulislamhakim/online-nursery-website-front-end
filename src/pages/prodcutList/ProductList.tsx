@@ -2,19 +2,27 @@ import Swal from 'sweetalert2';
 import {
    useDeleteAProductMutation,
    useGetAllProductsQuery,
+   useUpdateAProductMutation,
 } from '../../redux/features/products/productsApi';
 import { TProduct } from '../../types';
+import UpdateProductModal from '../../components/UpdateProductModal/UpdateProductModal';
+import { useState } from 'react';
 
 const ProductList = () => {
+   const [isModalOpen, setIsModalOpen] = useState(false);
+   const [selectedProduct, setSelectedProduct] = useState<TProduct | null>(null);
+
    const { data, isLoading } = useGetAllProductsQuery({});
    const [deleteAProduct] = useDeleteAProductMutation();
+   const [updateAProduct, { isLoading: updatingLoading }] =
+      useUpdateAProductMutation();
 
    if (isLoading) {
       return <p>Loading....</p>;
    }
-   const { products } = data.data;
+   const products = data?.data?.products;
 
-   const handleDelete = (id: string, title: string) => {
+   const handleProductDelete = (id: string, title: string) => {
       Swal.fire({
          html: `<span style="font-size: 18px;">Are you sure you want to delete <strong>${title}</strong>?</span>`,
          icon: 'warning',
@@ -32,9 +40,46 @@ const ProductList = () => {
                   text: 'Your file has been deleted.',
                   icon: 'success',
                });
+            } else {
+               Swal.fire({
+                  title: "Can't Deleted!",
+                  text: 'Something went wrong',
+                  icon: 'error',
+               });
             }
          }
       });
+   };
+
+   const handleUpdateProduct = async (updatedProduct: Partial<TProduct>) => {
+      try {
+         const result = await updateAProduct(updatedProduct).unwrap();
+         if (result.success) {
+            Swal.fire({
+               title: 'Updated!',
+               text: 'The product has been updated successfully.',
+               icon: 'success',
+            });
+         } else {
+            throw new Error('Update failed');
+         }
+      } catch (error) {
+         console.log({ error });
+
+         Swal.fire({
+            title: 'Update Failed',
+            text: 'There was an error updating the product.',
+            icon: 'error',
+         });
+      }
+      if (!updatingLoading) {
+         setIsModalOpen(false);
+      }
+   };
+
+   const handleEditClick = (product: TProduct) => {
+      setSelectedProduct(product);
+      setIsModalOpen(true);
    };
 
    return (
@@ -42,16 +87,19 @@ const ProductList = () => {
          <table className="table w-full">
             <thead>
                <tr>
+                  <th>No.</th>
                   <th>Image</th>
                   <th>Title</th>
-                  <th>Price</th>
                   <th>Category</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
                   <th>Actions</th>
                </tr>
             </thead>
             <tbody>
-               {products?.map((product: TProduct) => (
+               {products?.map((product: TProduct, idx: number) => (
                   <tr key={product?._id} className="hover">
+                     <td>{idx}</td>
                      <td>
                         <div className="avatar">
                            <div className="mask mask-squircle w-12 h-12">
@@ -62,16 +110,20 @@ const ProductList = () => {
                      <td>
                         <div className="font-bold">{product?.title}</div>
                      </td>
-                     <td>${product?.price.toFixed(2)}</td>
                      <td>{product?.category}</td>
+                     <td>${product?.price.toFixed(2)}</td>
+                     <td>{product?.quantity}</td>
                      <td>
                         <div className="flex flex-nowrap gap-2">
-                           <button className="btn btn-xs sm:btn-sm btn-primary whitespace-nowrap">
+                           <button
+                              onClick={() => handleEditClick(product)}
+                              className="btn btn-xs sm:btn-sm btn-primary whitespace-nowrap"
+                           >
                               Edit
                            </button>
                            <button
                               onClick={() =>
-                                 handleDelete(product?._id, product?.title)
+                                 handleProductDelete(product._id, product?.title)
                               }
                               className="btn btn-xs sm:btn-sm btn-error whitespace-nowrap"
                            >
@@ -79,10 +131,22 @@ const ProductList = () => {
                            </button>
                         </div>
                      </td>
+                     {/* <UpdateProductModal
+                        isOpen={true}
+                        product={product}
+                     ></UpdateProductModal> */}
                   </tr>
                ))}
             </tbody>
          </table>
+
+         <UpdateProductModal
+            isModalOpen={isModalOpen}
+            setIsModalOpen={() => setIsModalOpen(false)}
+            handleUpdateProduct={handleUpdateProduct}
+            product={selectedProduct}
+            updatingLoading={updatingLoading}
+         />
       </div>
    );
 };
