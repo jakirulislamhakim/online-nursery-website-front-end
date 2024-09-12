@@ -8,3 +8,12 @@ export type TProduct = {
    rating: number;
    image: string;
 };
+
+export type TAddNewProduct = {
+   title: string;
+   price: number;
+   category: string;
+   quantity: number;
+   description: string;
+   image: string;
+};

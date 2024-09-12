@@ -1,8 +1,18 @@
-import { TProduct } from '../../../types';
+import { TAddNewProduct, TProduct } from '../../../types';
 import { baseApi } from '../../api/baseApi';
 
 const products = baseApi.injectEndpoints({
    endpoints: builder => ({
+      createAProducts: builder.mutation({
+         query: (body: TAddNewProduct & { rating: number }) => {
+            return {
+               url: `/products`,
+               method: 'POST',
+               body,
+            };
+         },
+         invalidatesTags: ['product'],
+      }),
       getAllProducts: builder.query({
          query: (query: Record<string, unknown>) => {
             const { category, sort, searchTerm, page, limit } = query;
@@ -51,4 +61,5 @@ export const {
    useGetAllProductsQuery,
    useDeleteAProductMutation,
    useUpdateAProductMutation,
+   useCreateAProductsMutation,
 } = products;

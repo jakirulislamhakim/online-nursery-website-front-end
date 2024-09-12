@@ -1,5 +1,4 @@
-import { NavLink } from 'react-router-dom';
-import ProductList from '../../pages/prodcutList/ProductList';
+import { NavLink, Outlet } from 'react-router-dom';
 import Container from '../../utils/Container';
 
 const Dashboard = () => {
@@ -24,7 +23,7 @@ const Dashboard = () => {
             <div className="flex-grow w-full">
                {/* Your main content */}
                <Container>
-                  <ProductList />
+                  <Outlet></Outlet>
                </Container>
             </div>
          </div>
@@ -42,13 +41,34 @@ const Dashboard = () => {
                   <NavLink to={'/'}>Home</NavLink>
                </li>
                <li>
-                  <NavLink to={'/dashboard'}>Products Management</NavLink>
+                  <details open>
+                     <summary>Product Management</summary>
+                     <ul>
+                        <li>
+                           <NavLink to={'/dashboard/product-table'}>
+                              Product Table
+                           </NavLink>
+                        </li>
+                        <li>
+                           <NavLink to={'/dashboard/add-product'}>
+                              Add product
+                           </NavLink>
+                        </li>
+                     </ul>
+                  </details>
                </li>
                <li>
-                  <a></a>
-               </li>
-               <li>
-                  <a>Sidebar Item 2</a>
+                  <details>
+                     <summary>Category Management</summary>
+                     <ul>
+                        <li>
+                           <a>Submenu 1</a>
+                        </li>
+                        <li>
+                           <a>Submenu 2</a>
+                        </li>
+                     </ul>
+                  </details>
                </li>
             </ul>
          </div>

@@ -18,7 +18,14 @@ const ProductList = () => {
       useUpdateAProductMutation();
 
    if (isLoading) {
-      return <p>Loading....</p>;
+      return (
+         <div className="flex justify-center items-center h-screen">
+            <span className="loading loading-ball loading-xs"></span>
+            <span className="loading loading-ball loading-sm"></span>
+            <span className="loading loading-ball loading-md"></span>
+            <span className="loading loading-ball loading-lg"></span>
+         </div>
+      );
    }
    const products = data?.data?.products;
 
@@ -28,23 +35,35 @@ const ProductList = () => {
          icon: 'warning',
          showCancelButton: true,
          confirmButtonColor: '#3085d6',
+         // background: '#fff',
          cancelButtonColor: '#d33',
          confirmButtonText: 'Yes, delete it!',
       }).then(async result => {
          if (result.isConfirmed) {
-            const data = await deleteAProduct(id);
+            try {
+               const data = await deleteAProduct(id);
 
-            if (data.data.success) {
-               Swal.fire({
-                  title: 'Deleted!',
-                  text: 'Your file has been deleted.',
-                  icon: 'success',
-               });
-            } else {
+               if (data.data.success) {
+                  Swal.fire({
+                     title: 'Deleted!',
+                     text: 'Your product has been deleted.',
+                     icon: 'success',
+                     showConfirmButton: false,
+                     toast: true,
+                     background: '#f8d7da',
+                     timer: 3000,
+                  });
+               }
+            } catch (error) {
+               console.log(error);
                Swal.fire({
                   title: "Can't Deleted!",
                   text: 'Something went wrong',
                   icon: 'error',
+                  showConfirmButton: false,
+                  toast: true,
+                  background: '#f8d7da',
+                  timer: 3000,
                });
             }
          }
@@ -59,6 +78,10 @@ const ProductList = () => {
                title: 'Updated!',
                text: 'The product has been updated successfully.',
                icon: 'success',
+               showConfirmButton: false,
+               toast: true,
+               background: '#f8d7da',
+               timer: 2000,
             });
          } else {
             throw new Error('Update failed');
@@ -70,6 +93,10 @@ const ProductList = () => {
             title: 'Update Failed',
             text: 'There was an error updating the product.',
             icon: 'error',
+            showConfirmButton: false,
+            toast: true,
+            background: '#f8d7da',
+            timer: 3000,
          });
       }
       if (!updatingLoading) {
@@ -99,7 +126,7 @@ const ProductList = () => {
             <tbody>
                {products?.map((product: TProduct, idx: number) => (
                   <tr key={product?._id} className="hover">
-                     <td>{idx}</td>
+                     <td>{idx + 1}</td>
                      <td>
                         <div className="avatar">
                            <div className="mask mask-squircle w-12 h-12">
