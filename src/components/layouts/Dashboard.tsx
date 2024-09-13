@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import Container from '../../utils/Container';
+import { Menu } from 'lucide-react';
 
 const Dashboard = () => {
    return (
@@ -9,13 +10,12 @@ const Dashboard = () => {
          {/* Main Content Area */}
          <div className="drawer-content flex flex-col items-center lg:items-start justify-start lg:justify-between w-full ">
             {/* Page content here */}
-            <div className="w-full flex justify-between items-center bg-green-500 h-20">
-               {/* <h1 className="text-2xl font-bold">Dashboard</h1> */}
-               <label
-                  htmlFor="my-drawer-2"
-                  className="btn btn-primary drawer-button lg:hidden"
-               >
-                  Open Drawer
+            <div className="w-full flex justify-between items-center bg-green-500 h-20 px-2">
+               <h1 className="text-xl md:text-2xl font-bold text-white">
+                  Alisha Dashboard
+               </h1>
+               <label htmlFor="my-drawer-2" className="btn drawer-button lg:hidden">
+                  <Menu size={18} />
                </label>
             </div>
 
@@ -23,7 +23,7 @@ const Dashboard = () => {
             <div className="flex-grow w-full">
                {/* Your main content */}
                <Container>
-                  <Outlet></Outlet>
+                  <Outlet />
                </Container>
             </div>
          </div>
@@ -62,10 +62,14 @@ const Dashboard = () => {
                      <summary>Category Management</summary>
                      <ul>
                         <li>
-                           <a>Submenu 1</a>
+                           <NavLink to={'/dashboard/category-table'}>
+                              Category Table
+                           </NavLink>
                         </li>
                         <li>
-                           <a>Submenu 2</a>
+                           <NavLink to={'/dashboard/add-category'}>
+                              Add Category
+                           </NavLink>
                         </li>
                      </ul>
                   </details>

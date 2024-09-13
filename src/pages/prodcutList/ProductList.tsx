@@ -7,6 +7,7 @@ import {
 import { TProduct } from '../../types';
 import UpdateProductModal from '../../components/UpdateProductModal/UpdateProductModal';
 import { useState } from 'react';
+import { Package } from 'lucide-react';
 
 const ProductList = () => {
    const [isModalOpen, setIsModalOpen] = useState(false);
@@ -110,71 +111,82 @@ const ProductList = () => {
    };
 
    return (
-      <div className="overflow-x-auto w-full">
-         <table className="table w-full">
-            <thead>
-               <tr>
-                  <th>No.</th>
-                  <th>Image</th>
-                  <th>Title</th>
-                  <th>Category</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Actions</th>
-               </tr>
-            </thead>
-            <tbody>
-               {products?.map((product: TProduct, idx: number) => (
-                  <tr key={product?._id} className="hover">
-                     <td>{idx + 1}</td>
-                     <td>
-                        <div className="avatar">
-                           <div className="mask mask-squircle w-12 h-12">
-                              <img src={product?.image} alt={product?.title} />
+      <>
+         <div className=" flex justify-center items-center flex-col my-4 md:mb-8 md:mt-5 border-b-2 pb-2">
+            <h1 className="text-xl  md:text-3xl font-bold text-primary flex items-center">
+               <Package className="mr-2" size={32} />
+               Product Management
+            </h1>
+            <p className="text-xs md:text-sm text-gray-600 mt-2">
+               View, add, edit, remove and manage your nursery products here.
+            </p>
+         </div>
+         <div className="overflow-x-auto w-full">
+            <table className="table w-full">
+               <thead>
+                  <tr>
+                     <th>No.</th>
+                     <th>Image</th>
+                     <th>Title</th>
+                     <th>Category</th>
+                     <th>Price</th>
+                     <th>Quantity</th>
+                     <th>Actions</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {products?.map((product: TProduct, idx: number) => (
+                     <tr key={product?._id} className="hover">
+                        <td>{idx + 1}</td>
+                        <td>
+                           <div className="avatar">
+                              <div className="mask mask-squircle w-12 h-12">
+                                 <img src={product?.image} alt={product?.title} />
+                              </div>
                            </div>
-                        </div>
-                     </td>
-                     <td>
-                        <div className="font-bold">{product?.title}</div>
-                     </td>
-                     <td>{product?.category}</td>
-                     <td>${product?.price.toFixed(2)}</td>
-                     <td>{product?.quantity}</td>
-                     <td>
-                        <div className="flex flex-nowrap gap-2">
-                           <button
-                              onClick={() => handleEditClick(product)}
-                              className="btn btn-xs sm:btn-sm btn-primary whitespace-nowrap"
-                           >
-                              Edit
-                           </button>
-                           <button
-                              onClick={() =>
-                                 handleProductDelete(product._id, product?.title)
-                              }
-                              className="btn btn-xs sm:btn-sm btn-error whitespace-nowrap"
-                           >
-                              Delete
-                           </button>
-                        </div>
-                     </td>
-                     {/* <UpdateProductModal
+                        </td>
+                        <td>
+                           <div className="font-bold">{product?.title}</div>
+                        </td>
+                        <td>{product?.category}</td>
+                        <td>${product?.price.toFixed(2)}</td>
+                        <td>{product?.quantity}</td>
+                        <td>
+                           <div className="flex flex-nowrap gap-2">
+                              <button
+                                 onClick={() => handleEditClick(product)}
+                                 className="btn btn-xs sm:btn-sm btn-primary whitespace-nowrap"
+                              >
+                                 Edit
+                              </button>
+                              <button
+                                 onClick={() =>
+                                    handleProductDelete(product._id, product?.title)
+                                 }
+                                 className="btn btn-xs sm:btn-sm btn-error whitespace-nowrap"
+                              >
+                                 Delete
+                              </button>
+                           </div>
+                        </td>
+                        {/* <UpdateProductModal
                         isOpen={true}
                         product={product}
                      ></UpdateProductModal> */}
-                  </tr>
-               ))}
-            </tbody>
-         </table>
+                     </tr>
+                  ))}
+               </tbody>
+            </table>
 
-         <UpdateProductModal
-            isModalOpen={isModalOpen}
-            setIsModalOpen={() => setIsModalOpen(false)}
-            handleUpdateProduct={handleUpdateProduct}
-            product={selectedProduct}
-            updatingLoading={updatingLoading}
-         />
-      </div>
+            <UpdateProductModal
+               isModalOpen={isModalOpen}
+               setIsModalOpen={() => setIsModalOpen(false)}
+               handleUpdateProduct={handleUpdateProduct}
+               product={selectedProduct}
+               updatingLoading={updatingLoading}
+            />
+         </div>{' '}
+      </>
    );
 };
 

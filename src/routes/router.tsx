@@ -4,7 +4,9 @@ import Home from '../pages/Home/Home';
 import Product from '../pages/product/Product';
 import Dashboard from '../components/layouts/Dashboard';
 import ProductList from '../pages/prodcutList/ProductList';
-import ProductAddForm from '../components/productAddForm/ProductAddForm';
+import ProductAddForm from '../pages/productAddForm/ProductAddForm';
+import CategoryTable from '../pages/categoryList/CategoryTable';
+import CategoryAddForm from '../pages/categoryAddForm/CategoryAddForm';
 
 const router = createBrowserRouter([
    {
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
          {
             path: 'add-product',
             element: <ProductAddForm />,
+         },
+         {
+            path: 'category-table',
+            element: <CategoryTable />,
+         },
+         {
+            path: 'add-category',
+            element: <CategoryAddForm />,
          },
       ],
    },

@@ -9,8 +9,32 @@ const products = baseApi.injectEndpoints({
                method: 'GET',
             };
          },
+         providesTags: ['category'],
+      }),
+      createACategory: builder.mutation({
+         query: body => {
+            return {
+               url: '/categories',
+               method: 'POST',
+               body,
+            };
+         },
+         invalidatesTags: ['category'],
+      }),
+      deleteACategory: builder.mutation({
+         query: (id: string) => {
+            return {
+               url: `/categories/${id}`,
+               method: 'DELETE',
+            };
+         },
+         invalidatesTags: ['category'],
       }),
    }),
 });
 
-export const { useGetAllCategoryQuery } = products;
+export const {
+   useGetAllCategoryQuery,
+   useDeleteACategoryMutation,
+   useCreateACategoryMutation,
+} = products;

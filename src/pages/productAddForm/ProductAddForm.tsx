@@ -91,12 +91,15 @@ const ProductAddForm = () => {
                id="category"
                {...register('category', { required: 'Category is required' })}
                className="select select-bordered w-full"
+               defaultValue={''}
             >
-               <option value={''} disabled selected>
+               <option value={''} disabled>
                   Select a category
                </option>
                {categories?.map((category: TCategory) => (
-                  <option value={category?.category}>{category?.category}</option>
+                  <option value={category?.category} key={category._id}>
+                     {category?.category}
+                  </option>
                ))}
             </select>
             {errors.category && (

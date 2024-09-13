@@ -23,7 +23,7 @@ const PlantsTypeSection = () => {
    const [platsData, setPlantsData] = useState([]);
 
    useEffect(() => {
-      fetch('../../../public/jsonData/plantsType.json')
+      fetch('/jsonData/plantsType.json')
          .then(res => res.json())
          .then(data => setPlantsData(data));
    }, []);
