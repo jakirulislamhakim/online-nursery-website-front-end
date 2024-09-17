@@ -113,7 +113,7 @@ const ProductList = () => {
    return (
       <>
          <div className=" flex justify-center items-center flex-col my-4 md:mb-8 md:mt-5 border-b-2 pb-2">
-            <h1 className="text-xl  md:text-3xl font-bold text-primary flex items-center">
+            <h1 className="text-xl  md:text-3xl font-bold text-green-400 flex items-center">
                <Package className="mr-2" size={32} />
                Product Management
             </h1>

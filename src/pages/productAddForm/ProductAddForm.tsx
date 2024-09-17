@@ -74,7 +74,6 @@ const ProductAddForm = () => {
 
    return (
       <form
-         // fixme -> onsubmit type err fix
          onSubmit={handleSubmit(onSubmit)}
          className="space-y-3 md:w-3/4 lg:w-1/2 mx-auto border-2 p-4 rounded-lg shadow-lg border-green-200 m-2 mb-10"
       >

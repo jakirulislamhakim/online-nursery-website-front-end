@@ -7,6 +7,7 @@ import ProductList from '../pages/prodcutList/ProductList';
 import ProductAddForm from '../pages/productAddForm/ProductAddForm';
 import CategoryTable from '../pages/categoryList/CategoryTable';
 import CategoryAddForm from '../pages/categoryAddForm/CategoryAddForm';
+import Cart from '../pages/cart/Cart';
 
 const router = createBrowserRouter([
    {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
             element: <CategoryAddForm />,
          },
       ],
+   },
+   {
+      path: '/cart',
+      element: <Cart />,
    },
 ]);
 

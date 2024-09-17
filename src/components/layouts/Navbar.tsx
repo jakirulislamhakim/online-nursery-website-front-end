@@ -1,10 +1,11 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import SearchBarIcon from '../icons/SearchBarIcon';
-import CheckoutIcon from '../icons/CheckoutIcon';
 import DropdownMenu from '../icons/DropdownMenu';
+import CheckoutIcon from '../icons/CheckoutIcon';
 
 const Navbar = () => {
    const location = useLocation();
+   const productPagePath = location.pathname === '/products';
 
    const navItems = (
       <>
@@ -17,9 +18,6 @@ const Navbar = () => {
          <li>
             <NavLink to={'/dashboard/product-table'}>Dashboard</NavLink>
          </li>
-         <li>
-            <NavLink to={'/checkout'}>Checkout</NavLink>
-         </li>
       </>
    );
 
@@ -27,7 +25,11 @@ const Navbar = () => {
       <div className="bg-green-200 shadow-xl border-b-2 border-base-200 lg:rounded-xl">
          <div className="max-w-screen-2xl mx-auto ">
             <nav className="navbar">
-               <div className="navbar-start  p-0  lg:w-1/3">
+               <div
+                  className={`navbar-start  p-0  lg:${
+                     productPagePath ? 'w-1/3' : 'w-1/2'
+                  }`}
+               >
                   <div className="dropdown z-50">
                      <div
                         tabIndex={0}
@@ -54,9 +56,10 @@ const Navbar = () => {
                   <ul className="menu menu-horizontal space-x-4">{navItems}</ul>
                </div>
                <div className="navbar-end gap-1 md:gap-8">
-                  {location.pathname === '/products' && <SearchBarIcon />}
+                  {productPagePath && <SearchBarIcon />}
                   {/* {location.pathname === '/products' && <ProductFIlterIcon />} */}
                   {/* <LoginIcon /> */}
+
                   <CheckoutIcon />
                </div>
             </nav>
