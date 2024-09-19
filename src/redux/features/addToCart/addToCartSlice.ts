@@ -4,13 +4,13 @@ import { TProduct } from '../../../types';
 interface TCartState {
    products: (TProduct & { selectQuantity: number })[];
    totalPrice: number;
-   shipping: number;
+   shippingCost: number;
 }
 
 const initialState: TCartState = {
    products: [],
    totalPrice: 0,
-   shipping: 49,
+   shippingCost: 49,
 };
 
 const calculateTotalPrice = (products: (TProduct & { selectQuantity: number })[]) =>
@@ -40,7 +40,7 @@ const addToCartSlice = createSlice({
          }
 
          // include shipping amount
-         state.totalPrice = calculateTotalPrice(state.products) + state.shipping;
+         state.totalPrice = calculateTotalPrice(state.products) + state.shippingCost;
       },
       incrementQuantity: (state, actions: PayloadAction<string>) => {
          const product = state.products.find(
@@ -51,7 +51,7 @@ const addToCartSlice = createSlice({
          }
 
          // include shipping amount
-         state.totalPrice = calculateTotalPrice(state.products) + state.shipping;
+         state.totalPrice = calculateTotalPrice(state.products) + state.shippingCost;
       },
       decrementQuantity: (state, actions: PayloadAction<string>) => {
          const product = state.products.find(
@@ -62,7 +62,7 @@ const addToCartSlice = createSlice({
          }
 
          // include shipping amount
-         state.totalPrice = calculateTotalPrice(state.products) + state.shipping;
+         state.totalPrice = calculateTotalPrice(state.products) + state.shippingCost;
       },
       removeAProduct: (state, actions: PayloadAction<string>) => {
          state.products = state.products.filter(
@@ -70,7 +70,7 @@ const addToCartSlice = createSlice({
          );
 
          // include shipping amount
-         state.totalPrice = calculateTotalPrice(state.products) + state.shipping;
+         state.totalPrice = calculateTotalPrice(state.products) + state.shippingCost;
       },
       clearCart: state => {
          state.products = [];

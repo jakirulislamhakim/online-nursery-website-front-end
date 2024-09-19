@@ -6,7 +6,9 @@ import CheckoutModal from './CheckoutModal';
 
 const OrderSummary = () => {
    const [isOpenModal, setIsOpenModal] = useState(false);
-   const { totalPrice, shipping } = useAppSelector((state: RootState) => state.cart);
+   const { totalPrice, shippingCost } = useAppSelector(
+      (state: RootState) => state.cart
+   );
    const dispatch = useAppDispatch();
 
    const handleClearCart = () => {
@@ -20,11 +22,11 @@ const OrderSummary = () => {
             <div className="bg-gray-100 p-4 rounded-lg">
                <div className="flex justify-between mb-2">
                   <span>Subtotal</span>
-                  <span>${(totalPrice - shipping).toFixed(2)}</span>
+                  <span>${(totalPrice - shippingCost).toFixed(2)}</span>
                </div>
                <div className="flex justify-between mb-2">
                   <span>Shipping</span>
-                  <span>${shipping.toFixed(2)}</span>
+                  <span>${shippingCost.toFixed(2)}</span>
                </div>
                <div className="flex justify-between font-bold text-lg mt-2 pt-2 border-t">
                   <span>Total</span>
@@ -43,11 +45,7 @@ const OrderSummary = () => {
                Clear Cart
             </button>
          </div>
-         <CheckoutModal
-            isOpenModal={isOpenModal}
-            setIsOpenModal={setIsOpenModal}
-            totalPrice={totalPrice}
-         />
+         <CheckoutModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
       </div>
    );
 };

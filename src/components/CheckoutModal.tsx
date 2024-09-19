@@ -1,28 +1,100 @@
 import { useForm } from 'react-hook-form';
 import { X } from 'lucide-react';
-import { TCheckoutFormData } from '../types/checkoutFormData.types';
+import {
+   Payment_Method,
+   TCheckoutFormData,
+   TCreateOrder,
+   TOrderItem,
+} from '../types';
+import { useAppSelector } from '../redux/hooks';
+import { RootState } from '../redux/store';
+import { useCreateAOrderMutation } from '../redux/features/order/orderApi';
+import Swal from 'sweetalert2';
 
 type TCheckoutModalProps = {
    isOpenModal: boolean;
    setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
-   totalPrice: number;
 };
 
-const CheckoutModal = ({
-   isOpenModal,
-   setIsOpenModal,
-   totalPrice,
-}: TCheckoutModalProps) => {
+const CheckoutModal = ({ isOpenModal, setIsOpenModal }: TCheckoutModalProps) => {
+   const { products, shippingCost, totalPrice } = useAppSelector(
+      (state: RootState) => state.cart
+   );
+   const [createAOrder] = useCreateAOrderMutation();
+
    const {
       register,
       handleSubmit,
-      formState: { errors },
+      formState: { errors, isSubmitting },
+      reset,
    } = useForm<TCheckoutFormData>();
 
-   const onSubmit = (data: TCheckoutFormData) => {
-      console.log(data);
-      // Here you would typically send the data to your backend
-      setIsOpenModal(false);
+   const onSubmit = async (data: TCheckoutFormData) => {
+      const orderItems: TOrderItem[] = products.map(product => {
+         const { _id, price, selectQuantity, title } = product;
+         // every single order info
+         const orderItem: TOrderItem = {
+            productId: _id,
+            price,
+            productName: title,
+            quantity: selectQuantity,
+            totalPrice: price * selectQuantity,
+         };
+         return orderItem;
+      });
+
+      const orderData: TCreateOrder = {
+         ...data,
+         totalPrice,
+         shippingCost,
+         orderItems,
+      };
+
+      try {
+         const response = await createAOrder(orderData).unwrap();
+         console.log(response);
+         if (response.success) {
+            Swal.fire({
+               icon: 'success',
+               title: 'Order Placed Successfully!',
+               html: `
+                 <p>Please remember your orderId</p>
+                 <p><strong>Order ID:</strong> ${response.data.orderId}</p>
+                 <p><strong>Total:</strong> $${totalPrice.toFixed(2)}</p>
+                 <p><strong>Status:</strong> ${response.data.orderStatus}</p>
+                 <p><strong>Payment:</strong> ${response.data.paymentStatus}</p>
+               `,
+               toast: true,
+               position: 'center',
+               showConfirmButton: false,
+               timer: 6000,
+               timerProgressBar: true,
+               didOpen: toast => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer);
+                  toast.addEventListener('mouseleave', Swal.resumeTimer);
+               },
+            });
+         }
+         setIsOpenModal(false);
+         reset();
+         // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+         let errorMessage =
+            error.data.message || 'An unexpected error occurred. Please try again.';
+         if (error instanceof Error) {
+            errorMessage = error.message;
+         }
+         Swal.fire({
+            icon: 'error',
+            title: 'Order Placement Failed',
+            text: errorMessage,
+            toast: true,
+            position: 'center',
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true,
+         });
+      }
    };
 
    if (!isOpenModal) return null;
@@ -141,13 +213,55 @@ const CheckoutModal = ({
                   )}
                </div>
 
+               <div className="form-control">
+                  <label className="label">
+                     <span className="label-text">Payment Method</span>
+                  </label>
+                  <div className="flex flex-col gap-2">
+                     <label className="flex items-center">
+                        <input
+                           type="radio"
+                           value={Payment_Method.STRIPE}
+                           disabled
+                           {...register('paymentMethod', {
+                              required: 'Payment method is required',
+                           })}
+                           className="radio radio-primary mr-2"
+                        />
+                        <span className="label-text">Stripe (Coming Soon)</span>
+                     </label>
+                     <label className="flex items-center">
+                        <input
+                           type="radio"
+                           value={Payment_Method.CASHONDELIVERY}
+                           {...register('paymentMethod', {
+                              required: 'Payment method is required',
+                           })}
+                           className="radio radio-primary mr-2"
+                        />
+                        <span className="label-text">Cash on Delivery</span>
+                     </label>
+                  </div>
+                  {errors.paymentMethod && (
+                     <span className="text-error text-sm mt-1">
+                        {errors.paymentMethod.message as string}
+                     </span>
+                  )}
+               </div>
+
                <div className="bg-base-200 p-4 rounded-lg">
                   <h4 className="font-semibold mb-2">Order Summary</h4>
                   <p>Total:{totalPrice.toFixed(2)} TK</p>
                </div>
 
                <div className="modal-action">
-                  <button type="submit" className="btn btn-primary w-full">
+                  <button
+                     type="submit"
+                     className={`btn btn-primary btn-sm md:btn-md ${
+                        isSubmitting ? 'loading' : ''
+                     }`}
+                     disabled={isSubmitting}
+                  >
                      Place Order
                   </button>
                </div>

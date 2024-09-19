@@ -16,7 +16,7 @@ import {
 const CartPersistConfig = {
    key: 'cart',
    storage,
-   whitelist: ['products', 'totalPrice', 'shipping'],
+   whitelist: ['products', 'totalPrice', 'shippingCost'],
 };
 
 const carPersistedReducer = persistReducer(CartPersistConfig, addToCartReducer);
