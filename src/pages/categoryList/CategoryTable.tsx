@@ -98,7 +98,7 @@ const CategoryTable = () => {
                                     category?.category
                                  )
                               }
-                              className="btn btn-square btn-sm btn-error"
+                              className="btn btn-sm btn-success text-base font-semibold text-white"
                            >
                               <Trash2 size={16} />
                            </button>

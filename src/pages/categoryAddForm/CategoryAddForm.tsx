@@ -56,7 +56,7 @@ const CategoryAddForm = () => {
       <div className="mt-20 ">
          <div className="card w-80 md:w-96 bg-base-100 shadow-xl mx-auto border-green-300 border">
             <div className="card-body">
-               <h2 className="card-title text-primary">Add New Category</h2>
+               <h2 className="card-title text-green-800">Add New Category</h2>
                <div className="alert alert-warning shadow-lg mb-4">
                   <div className="flex gap-1">
                      <AlertTriangle />
@@ -96,7 +96,7 @@ const CategoryAddForm = () => {
                   <div className="card-actions justify-end">
                      <button
                         type="submit"
-                        className={`btn btn-primary btn-sm md:btn-md ${
+                        className={`btn btn-sm lg:btn-md btn-success text-base font-semibold text-white ${
                            isSubmitting ? 'loading' : ''
                         }`}
                         disabled={isSubmitting}

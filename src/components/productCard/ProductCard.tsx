@@ -1,6 +1,5 @@
 import StarRatings from 'react-star-ratings';
 import { TProduct } from '../../types';
-import { FaCartPlus } from 'react-icons/fa';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import {
    addToCart,
@@ -9,6 +8,7 @@ import {
 } from '../../redux/features/addToCart/addToCartSlice';
 import { RootState } from '../../redux/store';
 import { useNavigate } from 'react-router-dom';
+import { ShoppingCart } from 'lucide-react';
 
 const ProductCard = (product: TProduct) => {
    const navigate = useNavigate();
@@ -43,7 +43,7 @@ const ProductCard = (product: TProduct) => {
                   <span className="font-semibold ">{price} $</span>
                </p>
                <p className="text-end">
-                  Quantity:{' '}
+                  Quantity:
                   <span className="font-semibold">
                      {quantity === 0 ? <del>Stock out</del> : quantity}
                   </span>
@@ -78,7 +78,7 @@ const ProductCard = (product: TProduct) => {
                      -
                   </button>
                   <p>
-                     {perProductQuantity}{' '}
+                     {perProductQuantity}
                      {/* dynamically show increment or decrement value */}
                   </p>
                   <button
@@ -89,11 +89,14 @@ const ProductCard = (product: TProduct) => {
                   </button>
                </div>
                <button
-                  className={`tooltip ${quantity === 0 && 'hidden'}`}
+                  className={`tooltip btn btn-sm btn-success text-base font-semibold text-white ${
+                     quantity === 0 && 'hidden'
+                  }`}
                   data-tip="Add to cart"
                   onClick={() => handleAddToCart(product)}
                >
-                  <FaCartPlus className="text-4xl bg-black text-white rounded-full p-2" />
+                  {/* <FaCartPlus className="text-4xl bg-black text-white rounded-full p-2" /> */}
+                  <ShoppingCart size={18} />
                </button>
             </div>
          </div>

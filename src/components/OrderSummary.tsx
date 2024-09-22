@@ -3,6 +3,7 @@ import { clearCart } from '../redux/features/addToCart/addToCartSlice';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { RootState } from '../redux/store';
 import CheckoutModal from './CheckoutModal';
+import { ScanLine, Trash2 } from 'lucide-react';
 
 const OrderSummary = () => {
    const [isOpenModal, setIsOpenModal] = useState(false);
@@ -37,12 +38,15 @@ const OrderSummary = () => {
          <div className="w-full items-stretch">
             <button
                onClick={() => setIsOpenModal(true)}
-               className="btn btn-primary btn-block mb-2"
+               className="btn btn-sm lg:btn-md btn-success text-base font-semibold text-white btn-block mb-2"
             >
-               Proceed to Checkout
+               Proceed to Checkout <ScanLine size={18} strokeWidth={2.75} />
             </button>
-            <button className="btn btn-outline btn-block" onClick={handleClearCart}>
-               Clear Cart
+            <button
+               className="btn btn-outline btn-block hover:bg-white hover:text-green-500"
+               onClick={handleClearCart}
+            >
+               Clear Cart <Trash2 size={18} />
             </button>
          </div>
          <CheckoutModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />

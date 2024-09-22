@@ -8,11 +8,13 @@ import ProductAddForm from '../pages/productAddForm/ProductAddForm';
 import CategoryTable from '../pages/categoryList/CategoryTable';
 import CategoryAddForm from '../pages/categoryAddForm/CategoryAddForm';
 import Cart from '../pages/cart/Cart';
+import ErrorPage from '../pages/ErrorPage/ErrorPage.js';
 
 const router = createBrowserRouter([
    {
       path: '/',
       element: <App />,
+      errorElement: <ErrorPage />,
       children: [
          {
             index: true,

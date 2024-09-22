@@ -50,7 +50,7 @@ const CartTable = () => {
                      <td className="py-4 px-2">
                         <div className="flex items-center">
                            <button
-                              className="btn btn-circle btn-sm btn-outline"
+                              className="btn btn-circle btn-sm btn-outline hover:bg-green-500"
                               onClick={() => handleDecrement(product._id)}
                            >
                               <Minus size={16} />
@@ -59,7 +59,7 @@ const CartTable = () => {
                               {product.selectQuantity}
                            </span>
                            <button
-                              className="btn btn-circle btn-sm btn-outline"
+                              className="btn btn-circle btn-sm btn-outline hover:bg-green-500"
                               onClick={() => handleIncrement(product._id)}
                            >
                               <Plus size={16} />
@@ -71,7 +71,7 @@ const CartTable = () => {
                      </td>
                      <td className="py-4 px-2">
                         <button
-                           className="btn btn-ghost btn-sm text-red-500"
+                           className="btn btn-sm  btn-success text-base font-semibold text-white "
                            onClick={() => handleRemove(product._id)}
                         >
                            <Trash2 size={18} />

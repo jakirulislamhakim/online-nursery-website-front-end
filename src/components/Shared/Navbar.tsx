@@ -22,7 +22,7 @@ const Navbar = () => {
    );
 
    return (
-      <div className="bg-green-200 shadow-xl border-b-2 border-base-200 lg:rounded-xl">
+      <div className="bg-green-100 shadow-lg border-b-2 border-base-200 lg:rounded-xl">
          <div className="max-w-screen-2xl mx-auto ">
             <nav className="navbar">
                <div

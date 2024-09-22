@@ -64,7 +64,7 @@ const Product = () => {
    return (
       <Container className="md:my-12">
          <div className="flex justify-center">
-            <h2 className="text-2xl md:text-5xl font-semibold my-4 border-b-2 inline-block p-2  border-green-500">
+            <h2 className="text-2xl md:text-5xl font-semibold my-4 border-b-2 inline-block p-2  border-green-500 text-green-800">
                Product's
             </h2>
          </div>

@@ -89,7 +89,7 @@ const ProductAddForm = () => {
             <select
                id="category"
                {...register('category', { required: 'Category is required' })}
-               className="select select-bordered w-full"
+               className="select select-bordered w-full select-sm md:select-md"
                defaultValue={''}
             >
                <option value={''} disabled>
@@ -115,7 +115,7 @@ const ProductAddForm = () => {
                type="text"
                placeholder="sort product title"
                {...register('title', { required: 'Title is required' })}
-               className="input input-bordered w-full"
+               className="input input-bordered w-full input-sm md:input-md"
             />
             {errors.title && (
                <p className="text-red-500">{errors.title.message as string}</p>
@@ -134,7 +134,7 @@ const ProductAddForm = () => {
                   required: 'Price is required',
                   min: { value: 0, message: 'Price must be at least 0' },
                })}
-               className="input input-bordered w-full"
+               className="input input-bordered w-full input-sm md:input-md"
             />
             {errors.price && (
                <p className="text-red-500">{errors.price.message as string}</p>
@@ -153,7 +153,7 @@ const ProductAddForm = () => {
                   required: 'Quantity is required',
                   min: { value: 0, message: 'Quantity must be at least 0' },
                })}
-               className="input input-bordered w-full"
+               className="input input-bordered w-full input-sm md:input-md"
             />
             {errors.quantity && (
                <p className="text-red-500">{errors.quantity.message as string}</p>
@@ -211,7 +211,7 @@ const ProductAddForm = () => {
                id="image"
                type="url"
                {...register('image', { required: 'Image URL is required' })}
-               className="input input-bordered w-full"
+               className="input input-bordered w-full input-sm md:input-md"
                placeholder="product image URL"
             />
             {errors.image && (
@@ -222,10 +222,10 @@ const ProductAddForm = () => {
          <div className="flex justify-center">
             <button
                type="submit"
-               className="btn bg-green-400 btn-sm md:btn-md mt-2"
+               className="btn btn-sm lg:btn-md btn-success text-base font-semibold text-white mt-2"
                disabled={productAdding}
             >
-               Add Product
+               {productAdding ? 'Adding...' : 'Add Product'}
             </button>
          </div>
       </form>

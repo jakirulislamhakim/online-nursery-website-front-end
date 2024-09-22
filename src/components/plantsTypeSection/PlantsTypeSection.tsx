@@ -29,14 +29,14 @@ const PlantsTypeSection = () => {
    }, []);
 
    return (
-      <Container className="md:my-12">
-         <h2 className="text-xl md:text-3xl font-semibold py-3 md:py-6">
+      <Container className="my-4 md:my-12">
+         <h2 className="text-xl md:text-2xl font-semibold py-3 md:py-6 text-green-800">
             Shop By Plants Type
          </h2>
 
          <Swiper
             slidesPerView={5}
-            spaceBetween={30}
+            spaceBetween={20}
             freeMode={true}
             autoplay={{
                delay: 2000,
@@ -72,7 +72,7 @@ const PlantsTypeSection = () => {
          >
             {platsData?.map((plant: TPlant) => (
                <SwiperSlide key={plant?.id}>
-                  <div className="card bg-base-100 rounded-none shadow-xl">
+                  <div className="card bg-base-100 rounded-none shadow-xl h-[200px] md:h-full">
                      <figure>
                         <img
                            className="h-full w-full"

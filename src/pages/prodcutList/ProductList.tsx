@@ -7,13 +7,13 @@ import {
 import { TProduct } from '../../types';
 import UpdateProductModal from '../../components/UpdateProductModal/UpdateProductModal';
 import { useState } from 'react';
-import { Package } from 'lucide-react';
+import { FilePenLine, Package, Trash2 } from 'lucide-react';
 
 const ProductList = () => {
    const [isModalOpen, setIsModalOpen] = useState(false);
    const [selectedProduct, setSelectedProduct] = useState<TProduct | null>(null);
 
-   const { data, isLoading } = useGetAllProductsQuery({});
+   const { data, isLoading, error } = useGetAllProductsQuery({});
    const [deleteAProduct] = useDeleteAProductMutation();
    const [updateAProduct, { isLoading: updatingLoading }] =
       useUpdateAProductMutation();
@@ -29,6 +29,16 @@ const ProductList = () => {
       );
    }
    const products = data?.data?.products;
+
+   if (error) {
+      return (
+         <div>
+            <p className="h-72 flex justify-center items-center text-red-400 text-xl font-semibold">
+               {'something went wrong!'}
+            </p>
+         </div>
+      );
+   }
 
    const handleProductDelete = (id: string, title: string) => {
       Swal.fire({
@@ -155,17 +165,17 @@ const ProductList = () => {
                            <div className="flex flex-nowrap gap-2">
                               <button
                                  onClick={() => handleEditClick(product)}
-                                 className="btn btn-xs sm:btn-sm btn-primary whitespace-nowrap"
+                                 className="btn btn-sm btn-success text-base font-semibold text-white whitespace-nowrap"
                               >
-                                 Edit
+                                 <FilePenLine size={16} />
                               </button>
                               <button
                                  onClick={() =>
                                     handleProductDelete(product._id, product?.title)
                                  }
-                                 className="btn btn-xs sm:btn-sm btn-error whitespace-nowrap"
+                                 className="btn btn-sm  btn-success text-base font-semibold text-white whitespace-nowrap"
                               >
-                                 Delete
+                                 <Trash2 size={16} />
                               </button>
                            </div>
                         </td>
