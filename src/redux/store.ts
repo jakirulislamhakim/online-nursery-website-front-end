@@ -40,7 +40,7 @@ export const store = configureStore({
             ],
          },
       }).concat(baseApi.middleware),
-   // devTools: process.env.NODE_ENV !== 'production'// fixme --> devtools configuration
+   devTools: process.env.NODE_ENV !== 'production',
 });
 
 // parsisStore for the store

@@ -257,7 +257,7 @@ const CheckoutModal = ({ isOpenModal, setIsOpenModal }: TCheckoutModalProps) => 
                <div className="modal-action">
                   <button
                      type="submit"
-                     className={`btn btn-primary btn-sm md:btn-md ${
+                     className={`btn btn-sm lg:btn-md btn-success font-semibold text-white ${
                         isSubmitting ? 'loading' : ''
                      }`}
                      disabled={isSubmitting}
