@@ -8,6 +8,7 @@ import { TProduct } from '../../types';
 import UpdateProductModal from '../../components/UpdateProductModal/UpdateProductModal';
 import { useState } from 'react';
 import { FilePenLine, Package, Trash2 } from 'lucide-react';
+import PageTitle from '../../components/PageTitle';
 
 const ProductList = () => {
    const [isModalOpen, setIsModalOpen] = useState(false);
@@ -122,6 +123,7 @@ const ProductList = () => {
 
    return (
       <>
+         <PageTitle title="Product Table" />
          <div className=" flex justify-center items-center flex-col my-4 md:mb-8 md:mt-5 border-b-2 pb-2">
             <h1 className="text-xl  md:text-3xl font-bold text-green-400 flex items-center">
                <Package className="mr-2" size={32} />

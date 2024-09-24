@@ -5,6 +5,7 @@ import {
 } from '../../redux/features/categories/categoriesApi';
 import { TCategory } from '../../types/category.types';
 import Swal from 'sweetalert2';
+import PageTitle from '../../components/PageTitle';
 
 const CategoryTable = () => {
    const { data, isLoading } = useGetAllCategoryQuery(undefined);
@@ -65,6 +66,7 @@ const CategoryTable = () => {
 
    return (
       <>
+         <PageTitle title="Category Table" />
          <div className=" flex justify-center items-center flex-col my-4 md:mb-8 md:mt-5 border-b-2 pb-2">
             <h1 className="text-xl  md:text-3xl font-bold text-green-400 flex items-center">
                <Package className="mr-2" size={32} />

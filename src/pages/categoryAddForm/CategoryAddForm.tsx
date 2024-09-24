@@ -2,6 +2,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { PlusCircle, AlertTriangle } from 'lucide-react';
 import { useCreateACategoryMutation } from '../../redux/features/categories/categoriesApi';
 import Swal from 'sweetalert2';
+import PageTitle from '../../components/PageTitle';
 
 type TCreateCategory = {
    category: string;
@@ -53,68 +54,72 @@ const CategoryAddForm = () => {
    };
 
    return (
-      <div className="mt-20 ">
-         <div className="card w-80 md:w-96 bg-base-100 shadow-xl mx-auto border-green-300 border">
-            <div className="card-body">
-               <h2 className="card-title text-green-800">Add New Category</h2>
-               <div className="alert alert-warning shadow-lg mb-4">
-                  <div className="flex gap-1">
-                     <AlertTriangle />
-                     <span className="text-[10px]">
-                        Warning: Categories cannot be updated once added. Please add
-                        carefully.
-                     </span>
+      <>
+         <PageTitle title="Category Add" />
+         <div className="mt-20 ">
+            <div className="card w-80 md:w-96 bg-base-100 shadow-xl mx-auto border-green-300 border">
+               <div className="card-body">
+                  <h2 className="card-title text-green-800">Add New Category</h2>
+                  <div className="alert alert-warning shadow-lg mb-4">
+                     <div className="flex gap-1">
+                        <AlertTriangle />
+                        <span className="text-[10px]">
+                           Warning: Categories cannot be updated once added. Please
+                           add carefully.
+                        </span>
+                     </div>
                   </div>
-               </div>
-               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                  <div className="form-control">
-                     <label className="label">
-                        <span className="label-text">Category Name</span>
-                     </label>
-                     <input
-                        type="text"
-                        placeholder="Enter category name"
-                        className={`input input-bordered w-full ${
-                           errors.category ? 'input-error' : ''
-                        }`}
-                        {...register('category', {
-                           required: 'Category name is required',
-                           minLength: {
-                              value: 2,
-                              message: 'Category name must be at least 2 characters',
-                           },
-                        })}
-                     />
-                     {errors.category && (
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                     <div className="form-control">
                         <label className="label">
-                           <span className="label-text-alt text-error">
-                              {errors.category.message as string}
-                           </span>
+                           <span className="label-text">Category Name</span>
                         </label>
-                     )}
-                  </div>
-                  <div className="card-actions justify-end">
-                     <button
-                        type="submit"
-                        className={`btn btn-sm lg:btn-md btn-success text-base font-semibold text-white ${
-                           isSubmitting ? 'loading' : ''
-                        }`}
-                        disabled={isSubmitting}
-                     >
-                        {isSubmitting ? (
-                           'Adding...'
-                        ) : (
-                           <>
-                              <PlusCircle className="mr-2" size={20} />
-                              Add Category
-                           </>
+                        <input
+                           type="text"
+                           placeholder="Enter category name"
+                           className={`input input-bordered w-full ${
+                              errors.category ? 'input-error' : ''
+                           }`}
+                           {...register('category', {
+                              required: 'Category name is required',
+                              minLength: {
+                                 value: 2,
+                                 message:
+                                    'Category name must be at least 2 characters',
+                              },
+                           })}
+                        />
+                        {errors.category && (
+                           <label className="label">
+                              <span className="label-text-alt text-error">
+                                 {errors.category.message as string}
+                              </span>
+                           </label>
                         )}
-                     </button>
-                  </div>
-               </form>
+                     </div>
+                     <div className="card-actions justify-end">
+                        <button
+                           type="submit"
+                           className={`btn btn-sm lg:btn-md btn-success text-base font-semibold text-white ${
+                              isSubmitting ? 'loading' : ''
+                           }`}
+                           disabled={isSubmitting}
+                        >
+                           {isSubmitting ? (
+                              'Adding...'
+                           ) : (
+                              <>
+                                 <PlusCircle className="mr-2" size={20} />
+                                 Add Category
+                              </>
+                           )}
+                        </button>
+                     </div>
+                  </form>
+               </div>
             </div>
          </div>
-      </div>
+      </>
    );
 };
 

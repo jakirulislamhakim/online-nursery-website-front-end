@@ -14,7 +14,7 @@ const Dashboard = () => {
                <h1 className="text-xl md:text-2xl font-bold text-white">
                   Alisha Dashboard
                </h1>
-               <label htmlFor="my-drawer-2" className="btn drawer-button lg:hidden">
+               <label htmlFor="my-drawer-2" className="btn drawer-button lg:hidden text-green-600">
                   <Menu size={18} />
                </label>
             </div>
