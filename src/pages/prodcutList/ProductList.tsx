@@ -167,7 +167,8 @@ const ProductList = () => {
                            <div className="flex flex-nowrap gap-2">
                               <button
                                  onClick={() => handleEditClick(product)}
-                                 className="btn btn-sm btn-success text-base font-semibold text-white whitespace-nowrap"
+                                 className="btn tooltip btn-sm btn-success text-base font-semibold text-white whitespace-nowrap"
+                                 data-tip="Update"
                               >
                                  <FilePenLine size={16} />
                               </button>
@@ -175,7 +176,8 @@ const ProductList = () => {
                                  onClick={() =>
                                     handleProductDelete(product._id, product?.title)
                                  }
-                                 className="btn btn-sm  btn-success text-base font-semibold text-white whitespace-nowrap"
+                                 className="btn btn-sm btn-success text-base font-semibold text-white whitespace-nowrap tooltip"
+                                 data-tip="Delete"
                               >
                                  <Trash2 size={16} />
                               </button>

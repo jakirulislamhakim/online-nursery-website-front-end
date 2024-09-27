@@ -10,11 +10,14 @@ const Dashboard = () => {
          {/* Main Content Area */}
          <div className="drawer-content flex flex-col items-center lg:items-start justify-start lg:justify-between w-full ">
             {/* Page content here */}
-            <div className="w-full flex justify-between items-center bg-green-500 h-20 px-2">
+            <div className="w-full flex justify-between items-center bg-green-400 h-20 px-2">
                <h1 className="text-xl md:text-2xl font-bold text-white">
                   Alisha Dashboard
                </h1>
-               <label htmlFor="my-drawer-2" className="btn drawer-button lg:hidden text-green-600">
+               <label
+                  htmlFor="my-drawer-2"
+                  className="btn drawer-button lg:hidden text-green-600"
+               >
                   <Menu size={18} />
                </label>
             </div>

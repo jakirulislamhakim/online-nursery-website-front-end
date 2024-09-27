@@ -100,7 +100,8 @@ const CategoryTable = () => {
                                     category?.category
                                  )
                               }
-                              className="btn btn-sm btn-success text-base font-semibold text-white"
+                              className="btn btn-sm btn-success text-base font-semibold text-white tooltip"
+                              data-tip="Delete"
                            >
                               <Trash2 size={16} />
                            </button>

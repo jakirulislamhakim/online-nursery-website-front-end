@@ -251,7 +251,7 @@ const CheckoutModal = ({ isOpenModal, setIsOpenModal }: TCheckoutModalProps) => 
 
                <div className="bg-base-200 p-4 rounded-lg">
                   <h4 className="font-semibold mb-2">Order Summary</h4>
-                  <p>Total:{totalPrice.toFixed(2)} TK</p>
+                  <p>Total: {totalPrice.toFixed(2)} TK</p>
                </div>
 
                <div className="modal-action">

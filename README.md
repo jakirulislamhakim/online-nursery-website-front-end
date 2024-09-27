@@ -38,7 +38,7 @@ The frontend of the Online Nursery Website is a dynamic application developed us
    git clone https://github.com/jakirulislamhakim/online-nursery-website-front-end
    ```
 2. ```bash
-   cd frontend
+   cd online-nursery-website-front-end
    ```
 3. ```bash
    npm install

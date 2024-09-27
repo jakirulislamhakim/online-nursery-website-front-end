@@ -10,6 +10,8 @@ import { RootState } from '../../redux/store';
 import { useNavigate } from 'react-router-dom';
 import { ShoppingCart } from 'lucide-react';
 
+type TActionsType = 'increment' | 'decrement';
+
 const ProductCard = (product: TProduct) => {
    const navigate = useNavigate();
    const { category, description, image, price, quantity, rating, title, _id } =
@@ -17,9 +19,10 @@ const ProductCard = (product: TProduct) => {
    const dispatch = useAppDispatch();
    const { products } = useAppSelector((state: RootState) => state.cart);
    const item = products.find(product => product._id === _id);
-   const perProductQuantity = item?.selectQuantity || 0;
+   const perProductQuantity = item?.selectQuantity ?? 0;
 
-   const handleAddToCart = (selectedProduct: TProduct) => {
+   const handleAddToCart = (selectedProduct: TProduct, e: React.MouseEvent) => {
+      e.stopPropagation();
       dispatch(
          addToCart({
             ...selectedProduct,
@@ -29,8 +32,29 @@ const ProductCard = (product: TProduct) => {
       navigate('/cart');
    };
 
+   const handleQuantityUpdate = (
+      actionsType: TActionsType,
+      id: string,
+      e: React.MouseEvent
+   ) => {
+      e.stopPropagation();
+      if (actionsType === 'increment') {
+         dispatch(incrementQuantity(id));
+      } else if (actionsType === 'decrement') {
+         dispatch(decrementQuantity(id));
+      }
+   };
+
+   const handleNavigateDetailsPage = (id: string) => {
+      navigate(`/products/${id}`);
+   };
+
    return (
-      <div className="card bg-base-100  mx-auto shadow-xl">
+      // <Link to={`/products/${_id}`}>
+      <div
+         onClick={() => handleNavigateDetailsPage(_id)}
+         className="card bg-base-100  mx-auto shadow-xl hover:cursor-pointer"
+      >
          <figure className="max-h-[200px] md:max-h-[300px] bg-cover">
             <img className="w-full h-full" src={image} alt={category} />
          </figure>
@@ -72,7 +96,7 @@ const ProductCard = (product: TProduct) => {
                   }`}
                >
                   <button
-                     onClick={() => dispatch(decrementQuantity(_id))}
+                     onClick={e => handleQuantityUpdate('decrement', _id, e)}
                      className="hover:bg-green-400 px-2 text-xl border-r"
                   >
                      -
@@ -82,25 +106,25 @@ const ProductCard = (product: TProduct) => {
                      {/* dynamically show increment or decrement value */}
                   </p>
                   <button
-                     onClick={() => dispatch(incrementQuantity(_id))}
+                     onClick={e => handleQuantityUpdate('increment', _id, e)}
                      className="hover:bg-green-400 px-2 text-xl border-l"
                   >
                      +
                   </button>
                </div>
-               <button
-                  className={`tooltip btn btn-sm btn-success text-base font-semibold text-white ${
-                     quantity === 0 && 'hidden'
-                  }`}
-                  data-tip="Add to cart"
-                  onClick={() => handleAddToCart(product)}
-               >
-                  {/* <FaCartPlus className="text-4xl bg-black text-white rounded-full p-2" /> */}
-                  <ShoppingCart size={18} />
-               </button>
+               {quantity > 0 && (
+                  <button
+                     className={`tooltip btn btn-sm btn-success text-base font-semibold text-white`}
+                     data-tip="Add to cart"
+                     onClick={e => handleAddToCart(product, e)}
+                  >
+                     <ShoppingCart size={18} />
+                  </button>
+               )}
             </div>
          </div>
       </div>
+      // </Link>
    );
 };
 

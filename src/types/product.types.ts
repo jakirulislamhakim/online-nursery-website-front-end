@@ -7,6 +7,9 @@ export type TProduct = {
    description: string;
    rating: number;
    image: string;
+   lightRequirements: string;
+   growthRate: string;
+   soilType: string;
 };
 
 export type TAddNewProduct = {
@@ -16,4 +19,7 @@ export type TAddNewProduct = {
    quantity: number;
    description: string;
    image: string;
+   lightRequirements: string;
+   growthRate: string;
+   soilType: string;
 };

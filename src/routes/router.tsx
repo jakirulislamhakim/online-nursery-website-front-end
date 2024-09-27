@@ -9,6 +9,7 @@ import CategoryTable from '../pages/categoryList/CategoryTable';
 import CategoryAddForm from '../pages/categoryAddForm/CategoryAddForm';
 import Cart from '../pages/cart/Cart';
 import ErrorPage from '../pages/ErrorPage/ErrorPage.js';
+import ProductDetails from '../pages/productDetails/ProductDetails.js';
 
 const router = createBrowserRouter([
    {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
          {
             path: 'products',
             element: <Product />,
+         },
+         {
+            path: 'products/:id',
+            element: <ProductDetails />,
          },
       ],
    },

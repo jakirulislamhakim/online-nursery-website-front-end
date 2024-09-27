@@ -183,34 +183,6 @@ const ProductAddForm = () => {
             </div>
 
             <div>
-               <label htmlFor="rating" className="label">
-                  <span className="label-text">Rating</span>
-               </label>
-               {/* <input
-               id="rating"
-               type="number"
-               {...register('rating', {
-                  required: 'Rating is required',
-                  min: { value: 0, message: 'Rating must be between 0 and 5' },
-                  max: { value: 5, message: 'Rating must be between 0 and 5' },
-               })}
-               className="input input-bordered w-full"
-            /> */}
-               <StarRatings
-                  rating={rating}
-                  starRatedColor="green"
-                  starHoverColor="green"
-                  numberOfStars={5}
-                  name="rating"
-                  starDimension="20px"
-                  starSpacing="0px"
-                  starEmptyColor="gray"
-                  changeRating={value => setRating(value)}
-               />
-               {!rating && <p className="text-red-500">{ratingErrMsg}</p>}
-            </div>
-
-            <div>
                <label htmlFor="image" className="label">
                   <span className="label-text">Image</span>
                </label>
@@ -224,6 +196,82 @@ const ProductAddForm = () => {
                {errors.image && (
                   <p className="text-red-500">{errors.image.message as string}</p>
                )}
+            </div>
+
+            <div>
+               <label htmlFor="lightRequirements" className="label">
+                  <span className="label-text">Light Requirements</span>
+               </label>
+               <input
+                  id="lightRequirements"
+                  type="text"
+                  {...register('lightRequirements', {
+                     required: 'LightRequirements is required',
+                  })}
+                  className="input input-bordered w-full input-sm md:input-md"
+                  placeholder="Product light requirements"
+               />
+               {errors.lightRequirements && (
+                  <p className="text-red-500">
+                     {errors.lightRequirements.message as string}
+                  </p>
+               )}
+            </div>
+
+            <div>
+               <label htmlFor="growthRate" className="label">
+                  <span className="label-text">Growth Rate</span>
+               </label>
+               <input
+                  id="growthRate"
+                  type="text"
+                  {...register('growthRate', {
+                     required: 'growthRate  is required',
+                  })}
+                  className="input input-bordered w-full input-sm md:input-md"
+                  placeholder="product growthRate"
+               />
+               {errors.growthRate && (
+                  <p className="text-red-500">
+                     {errors.growthRate.message as string}
+                  </p>
+               )}
+            </div>
+
+            <div>
+               <label htmlFor="soilType" className="label">
+                  <span className="label-text">Soil Type</span>
+               </label>
+               <input
+                  id="soilType"
+                  type="text"
+                  {...register('soilType', {
+                     required: 'Soil type is required',
+                  })}
+                  className="input input-bordered w-full input-sm md:input-md"
+                  placeholder="Product soil type"
+               />
+               {errors.soilType && (
+                  <p className="text-red-500">{errors.soilType.message as string}</p>
+               )}
+            </div>
+
+            <div>
+               <label htmlFor="rating" className="label">
+                  <span className="label-text">Rating</span>
+               </label>
+               <StarRatings
+                  rating={rating}
+                  starRatedColor="green"
+                  starHoverColor="green"
+                  numberOfStars={5}
+                  name="rating"
+                  starDimension="20px"
+                  starSpacing="0px"
+                  starEmptyColor="gray"
+                  changeRating={value => setRating(value)}
+               />
+               {!rating && <p className="text-red-500">{ratingErrMsg}</p>}
             </div>
 
             <div className="flex justify-center">
